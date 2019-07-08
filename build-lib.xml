@@ -17,6 +17,8 @@
 	<!-- jar makers -->
 	<target name="com" depends="compile">
 		<jar destfile="${bin.dir}/libnpw-core-${core-version}.jar">
+	        <fileset dir="bin/" includes="module-info.class" />
+	        <fileset dir="src/" includes="module-info.java" />
 	        <fileset dir="bin/" includes="com/nullpointerworks/core/**/*.class" />
 	        <fileset dir="bin/" includes="exp/nullpointerworks/core/**/*.class" />
 	        <fileset dir="src/" includes="com/nullpointerworks/core/**/*.java" />
