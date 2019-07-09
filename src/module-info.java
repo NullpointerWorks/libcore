@@ -1,7 +1,7 @@
 /**
- * @since 1.0
+ * @version 1.0.2
  */
-module com.nullpointerworks.core
+module libnpw.core
 {
 	requires java.base;
 	requires transitive java.desktop;
