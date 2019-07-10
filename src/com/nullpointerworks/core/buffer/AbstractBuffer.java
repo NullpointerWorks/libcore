@@ -3,12 +3,12 @@
  * Nullpointer Works (2017-2019)
  * Use is subject to license terms.
  */
-package com.nullpointerworks.core.buffer.abstracts;
+package com.nullpointerworks.core.buffer;
 
 /**
  * Buffer object abstract for all libnpw-core buffers.
  */
-public abstract class AbstractBuffer<B>
+abstract class AbstractBuffer<B>
 {
 	protected int width = 0;
 	protected int height = 0;

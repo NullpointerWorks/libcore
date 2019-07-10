@@ -5,8 +5,6 @@
  */
 package com.nullpointerworks.core.buffer;
 
-import com.nullpointerworks.core.buffer.abstracts.AbstractBuffer;
-
 public class LongBuffer extends AbstractBuffer<LongBuffer> 
 {
 	protected long[] pixels;

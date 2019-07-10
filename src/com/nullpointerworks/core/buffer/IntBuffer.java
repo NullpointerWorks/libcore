@@ -5,8 +5,6 @@
  */
 package com.nullpointerworks.core.buffer;
 
-import com.nullpointerworks.core.buffer.abstracts.AbstractBuffer;
-
 public class IntBuffer extends AbstractBuffer<IntBuffer>
 {
 	protected int[] pixels;

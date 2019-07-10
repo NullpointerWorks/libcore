@@ -5,8 +5,6 @@
  */
 package com.nullpointerworks.core.buffer;
 
-import com.nullpointerworks.core.buffer.abstracts.AbstractBuffer;
-
 /**
  * a byte buffer for 8-bit graphics display<br>
  * <br>
