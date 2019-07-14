@@ -1,6 +1,6 @@
 /**
  * @version 1.0.2
- * @author Michiel Drost - nullpointerworks
+ * @author Michiel Drost - Nullpointer Works
  */
 module libnpw.core
 {
