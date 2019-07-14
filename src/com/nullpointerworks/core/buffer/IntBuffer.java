@@ -5,173 +5,174 @@
  */
 package com.nullpointerworks.core.buffer;
 
+/**
+ * A buffer implementation that contains a {@code short} array.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
+ */
 public class IntBuffer extends AbstractBuffer<IntBuffer>
 {
-	protected int[] pixels;
+	protected int[] values;
 	
 	/**
-	 * 
-	 * @param width
-	 * @param height
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to 0.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
 	 */
-	public IntBuffer(int w, int h) 
+	public IntBuffer(int width, int height) 
 	{
-		super(w,h);
-		createBuffer(w,h);
-	}
-	
-	/**
-	 * 
-	 * @param width
-	 * @param height
-	 * @param clear
-	 */
-	public IntBuffer(int w, int h, int clear) 
-	{
-		super(w,h);
-		createBuffer(w,h);
-		clear(clear);
-	}
-	
-	protected void createBuffer(int w, int h)
-	{
-		setBuffer(w,h);
-		pixels = new int[length];
-	}
-	
-	/**
-	 * resize the buffer from its original size.<br>
-	 * this may lead to data loss if the new width<br>
-	 * and/or height are less than the original dimensions
-	 */
-	public void resize(int w, int h)
-	{
-		resize(w,h,0);
+		createBuffer(width,height);
 	}
 
 	/**
-	 * resize the buffer from its original size and<br>
-	 * clear it with the given integer.<br>
-	 * this may lead to data loss if the new width<br>
-	 * and/or height are less than the original dimensions
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
 	 */
-	public void resize(int w, int h, int value)
+	public IntBuffer(int width, int height, int init) 
 	{
-		int bw = width, bh = height;
-		int bindex = 0, bstride = bw;
-		int index = 0, stride = w;
-		
-		int[] buff = pixels;
-		createBuffer(w,h);
-		clear(value);
-		
-		bh = (bh<h)?bh:h;
-		bw = (bw<w)?bw:w;
-		
-		for (int i=0; i<bh; i++)
+		createBuffer(width,height);
+		clear(init);
+	}
+	
+	/**
+	 * Creates a buffer with the given dimensions.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
+	 */
+	protected void createBuffer(int width, int height)
+	{
+		setBuffer(width,height);
+		values = new int[length];
+	}
+	
+	/**
+     * Copies the content of the given array onto the buffer.
+     * @param array - the array of values to be copied
+	 * @since 1.0.0
+     */
+    public void plot(int[] array)
+    {
+    	for (int i=0, l=array.length; i<l; i++)
     	{
-			for (int j=0; j<bw; j++)
-	    	{
-				pixels[index+j] = buff[bindex+j];
-	    	}
-			bindex += bstride;
-			index += stride;
+    		values[i] = array[i];
     	}
-		
-		buff = null;
-	}
-	
-	/**
-	 * clear buffers for garbage collection
-	 */
-	public void free()
+    }
+
+    /**
+     * Places the given value onto the buffer at the 
+     * specified index. This method has no boundary detection. 
+     * It is up to the user to make sure the index is within 
+     * bounds.
+	 * @param index - the index in the buffer
+	 * @param value - the value to be placed
+	 * @since 1.0.0
+     */
+    public void plot(int index, int value)
 	{
-		pixels = null;
+		values[index] = value;
 	}
 	
-	/**
-	 * all elements are set to the given value
-	 */
-	public void clear(int c) 
+    /**
+     * Places the given value onto the buffer at the specified 
+     * coordinates. This method has no boundary detection. 
+     * It is up to the user to make sure the index is within 
+     * bounds.
+	 * @param x - the location along the width of the buffer
+	 * @param y - the location along the height of the buffer
+	 * @param value - the value to be placed
+	 * @since 1.0.0
+     */
+	public void plot(int x, int y, int value)
 	{
-		for (int i=0, l=pixels.length; i<l; i++)
-			pixels[i] = c;
+		int i = x + y*width;
+		values[i] = value;
 	}
-	
+
 	/**
-	 * returns all pixels in the texture
+	 * Set the value of the entire buffer to the given value.
+	 * @param value - the value to clear the buffer with
+	 * @since 1.0.0
+	 */
+	public void clear(int value) 
+	{
+		for (int l=length-1; l>=0; l--) values[l] = value;
+	}
+
+	/**
+	 * Returns the array content of the buffer.
+	 * @return the array content of the buffer
+	 * @since 1.0.0
 	 */
 	public int[] content() 
 	{
-		return pixels;
+		return values;
 	}
-	
+
 	/**
-	 * get a clean copy of this buffer
+	 * Take a value from the buffer at the specified index. This 
+	 * method has no boundary detection. It is up to the user to 
+	 * make sure the index is within bounds.
+	 * @param index - an index in the buffer array
+	 * @return the value from the buffer at the specified index
+	 * @since 1.0.0
 	 */
-	public IntBuffer copy()
+	public int grab(int index)
 	{
-		IntBuffer buff = new IntBuffer(width,height);
-		buff.plot(this.content());
-		return buff;
-	}
-
-	// ==========================================
-	
-	/**
-     * copy over an int[] with colors to draw
-     */
-    public void plot(int[] c)
-    {
-    	for (int i=0, l=c.length; i<l; i++)
-    	{
-    		pixels[i] = c[i];
-    	}
-    }
-    
-    /**
-     * plot a single pixel to the canvas
-     */
-	public void plot(int i, int c)
-	{
-		pixels[i] = c;
+		return values[index];
 	}
 	
-    /**
-     * plot a single pixel to the canvas
-     */
-	public void plot(int x, int y, int c)
-	{
-		int i = x + y*width;
-		pixels[i] = c;
-	}
-
-	// ==========================================
-	
 	/**
-	 * get the color from the buffer with an index
-	 */
-	public int grab(int i)
-	{
-		return pixels[i];
-	}
-
-	/**
-	 * get the color from the buffer
+	 * Take a value from the buffer at the specified coordinates.
+	 * This method has no boundary detection. It is up to the user 
+	 * to make sure the index is within bounds.
+	 * @param x - the location along the width of the buffer
+	 * @param y - the location along the height of the buffer
+	 * @return the value from the buffer at the specified coordinates
+	 * @since 1.0.0
 	 */
 	public int grab(int x, int y)
 	{
-		return pixels[x + y*width];
+		return values[x + y*width];
 	}
 	
 	/**
-	 * get the color from a texture using u,v and w values<br>
+	 * Take a value from the buffer at the specified UV mapping 
+	 * coordinates. The parameter W is a depth scaling value 
+	 * that can be kept at 1 if no depth correction is performed.
+	 * This method has no boundary detection. It is up to the user 
+	 * to make sure the index is within bounds.
+	 * @param u - a factor [0-1] along the width of the buffer
+	 * @param v - a factor [0-1] along the height of the buffer
+	 * @param w - the depth scaling parameter
+	 * @return the value from the buffer at the found coordinates
+	 * @since 1.0.0
 	 */
 	public int grab(float u, float v, float w)
 	{
 		float sc = 0.999f*w;
 		int x = (int)(sc*u*width);
 		int y = (int)(sc*v*height);
-		return pixels[x + y*width];
+		return values[x + y*width];
+	}
+	
+	@Override
+	public void free()
+	{
+		values = null;
+	}
+
+	@Override
+	public IntBuffer copy()
+	{
+		IntBuffer buff = new IntBuffer(width,height);
+		buff.plot(this.content());
+		return buff;
 	}
 }

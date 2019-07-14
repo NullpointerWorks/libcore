@@ -7,40 +7,47 @@ package com.nullpointerworks.core.buffer.concurrency;
 
 import com.nullpointerworks.core.buffer.ByteBuffer;
 
+/**
+ * A thread safe implementation of the {@code ByteBuffer}.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
+ */
 public class SyncByteBuffer extends ByteBuffer
 {
 	private SyncByteBuffer lock = this;
-	
-	public SyncByteBuffer(int w, int h) 
+
+	/**
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to false.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
+	 */
+	public SyncByteBuffer(int width, int height) 
 	{
-		super(w, h);
+		super(width, height);
 	}
-	
-	public SyncByteBuffer(int w, int h, byte i) 
+
+	/**
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
+	 */
+	public SyncByteBuffer(int width, int height, byte init) 
 	{
-		super(w, h, i);
-	}
-	
-	public void resize(int w, int h)
-	{
-		resize(w,h,(byte)0);
-	}
-	
-	public void resize(int w, int h, byte value)
-	{
-		synchronized (lock)
-		{
-			super.resize(w, h, value);
-		}
+		super(width, height, init);
 	}
 
 	// ==========================================
 	
-	public void clear(byte c) 
+	public void clear(byte value) 
 	{
 		synchronized (lock)
 		{
-			super.clear(c);
+			super.clear(value);
 		}
 	}
 	
@@ -72,11 +79,11 @@ public class SyncByteBuffer extends ByteBuffer
 	
 	// ==========================================
 	
-	public byte grab(int i)
+	public byte grab(int index)
 	{
 		synchronized (lock)
 		{
-			return super.grab(i);
+			return super.grab(index);
 		}
 	}
 	
@@ -98,27 +105,27 @@ public class SyncByteBuffer extends ByteBuffer
 	
 	// ==========================================
 	
-	public void plot(byte[] c)
+	public void plot(byte[] values)
 	{
 		synchronized (lock)
 		{
-			super.plot(c);
+			super.plot(values);
 		}
 	}
 	
-	public void plot(int i, byte c)
+	public void plot(int index, byte value)
 	{
 		synchronized (lock)
 		{
-			super.plot(i, c);
+			super.plot(index, value);
 		}
 	}
 	
-	public void plot(int x, int y, byte c)
+	public void plot(int x, int y, byte value)
 	{
 		synchronized (lock)
 		{
-			super.plot(x, y, c);
+			super.plot(x, y, value);
 		}
 	}
 }

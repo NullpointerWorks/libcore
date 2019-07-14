@@ -13,27 +13,37 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JPanel;
 
 /**
- * @author Michiel Drost - nullpointerworks
+ * Contains a {@code BufferedImage} as a basic rendering surface. 
+ * This implementation of {@code DrawCanvas} extends a {@code JPanel} 
+ * and is also returned from the {@code component()} method.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
  */
 public class PanelCanvas extends JPanel implements DrawCanvas
 {
 	private static final long serialVersionUID = 8800843681463260252L;
-
 	private int width = 0;
 	private int height = 0;
 	private BufferedImage bi;
 	private int[] pixels;
 	
-	public PanelCanvas(int w, int h) 
+	/**
+	 * Creates a drawing surface of the given dimensions. It will 
+	 * accepts colors as integers in ARGB format at 8 bit depth.
+	 * @param width - the width of the drawing surface
+	 * @param height - the height of the drawing surface
+	 * @since 1.0.0
+	 */
+	public PanelCanvas(int width, int height) 
 	{
-		width = w;
-		height = h;
-		setSize(w, h);
+		this.width=width;
+		this.height=height;
+		setSize(width, height);
 		setPreferredSize(getSize());
 		setMaximumSize(getSize());
 		setMinimumSize(getSize());
 		
-		bi = new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
+		bi = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		pixels = getContent(bi);
 	}
 
@@ -56,13 +66,13 @@ public class PanelCanvas extends JPanel implements DrawCanvas
 	}
 	
 	@Override
-	public void swap(int[] p)
+	public void swap(int[] pix)
 	{
-		if (p.length != pixels.length) return;
+		if (pix.length != pixels.length) return;
 		int l=pixels.length-1;
 		for (;l>=0;l--)
 		{
-			pixels[l] = p[l];
+			pixels[l] = pix[l];
 		}
 		paint(this.getGraphics());
 	}

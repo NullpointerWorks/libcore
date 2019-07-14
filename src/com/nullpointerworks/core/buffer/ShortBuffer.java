@@ -6,159 +6,169 @@
 package com.nullpointerworks.core.buffer;
 
 /**
- * a byte buffer for 8-bit graphics display<br>
- * <br>
- * Regular color palette for 8-bit is:<br>
- * Bit  : 7  6  5  4  3  2  1  0<br>
- * Data : R  R  R  G  G  G  B  B<br>
+ * A buffer implementation that contains a {@code short} array.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
  */
 public class ShortBuffer extends AbstractBuffer<ShortBuffer>
 {
-	protected short[] pixels;
-
-	public ShortBuffer(int w, int h) 
-	{
-		super(w, h);
-		createBuffer(w,h);
-	}
-	
-	public ShortBuffer(int w, int h, short clear) 
-	{
-		super(w,h);
-		createBuffer(w,h);
-		clear(clear);
-	}
-	
-	protected void createBuffer(int w, int h)
-	{
-		setBuffer(w,h);
-		pixels = new short[length];
-	}
+	protected short[] values;
 	
 	/**
-	 * resize the buffer from its original size.<br>
-	 * this may lead to data loss if the new width<br>
-	 * and/or height are less than the original dimensions
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to 0.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
 	 */
-	public void resize(int w, int h)
+	public ShortBuffer(int width, int height) 
 	{
-		resize(w,h,(short)0);
+		createBuffer(width,height);
 	}
 
 	/**
-	 * resize the buffer from its original size and<br>
-	 * clear it with the given color.<br>
-	 * this may lead to data loss if the new width<br>
-	 * and/or height are less than the original dimensions
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
 	 */
-	public void resize(int w, int h, short value)
+	public ShortBuffer(int width, int height, short init) 
 	{
-		int bw = width, bh = height;
-		int bindex = 0, bstride = bw;
-		int index = 0, stride = w;
-		
-		short[] buff = pixels;
-		createBuffer(w,h);
-		clear(value);
-
-		bh = (bh<h)?bh:h;
-		bw = (bw<w)?bw:w;
-		
-		for (int i=0; i<bh; i++)
-    	{
-			for (int j=0; j<bw; j++)
-	    	{
-				pixels[index+j] = buff[bindex+j];
-	    	}
-			bindex += bstride;
-			index += stride;
-    	}
-		buff=null;
+		createBuffer(width,height);
+		clear(init);
 	}
 	
-	/*
-	 * clear buffers for garbage collection
+	/**
+	 * Creates a buffer with the given dimensions.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
 	 */
-	public void free()
+	protected void createBuffer(int width, int height)
 	{
-		pixels = null;
+		setBuffer(width,height);
+		values = new short[length];
 	}
 	
-	/*
-     * copy over an int[] with colors to draw
+	/**
+     * Copies the content of the given array onto the buffer.
+     * @param array - the array of values to be copied
+	 * @since 1.0.0
      */
-    public void plot(short[] c)
+    public void plot(short[] array)
     {
-    	for (int i=0, l=c.length; i<l; i++)
+    	for (int i=0, l=array.length; i<l; i++)
     	{
-    		pixels[i] = c[i];
+    		values[i] = array[i];
     	}
     }
-    
-    /*
-     * plot a single pixel to the canvas
+
+    /**
+     * Places the given value onto the buffer at the 
+     * specified index. This method has no boundary detection. 
+     * It is up to the user to make sure the index is within 
+     * bounds.
+	 * @param index - the index in the buffer
+	 * @param value - the value to be placed
+	 * @since 1.0.0
      */
-	public void plot(int i, short c)
+    public void plot(int index, short value)
 	{
-		pixels[i] = c;
+		values[index] = value;
 	}
 	
-    /*
-     * plot a single pixel to the canvas
+    /**
+     * Places the given value onto the buffer at the specified 
+     * coordinates. This method has no boundary detection. 
+     * It is up to the user to make sure the index is within 
+     * bounds.
+	 * @param x - the location along the width of the buffer
+	 * @param y - the location along the height of the buffer
+	 * @param value - the value to be placed
+	 * @since 1.0.0
      */
-	public void plot(int x, int y, short c)
+	public void plot(int x, int y, short value)
 	{
 		int i = x + y*width;
-		pixels[i] = c;
+		values[i] = value;
 	}
-	
-	/*
-	 * 
+
+	/**
+	 * Set the value of the entire buffer to the given value.
+	 * @param value - the value to clear the buffer with
+	 * @since 1.0.0
 	 */
-	public void clear(short c) 
+	public void clear(short value) 
 	{
-		for (int i=0, l=pixels.length; i<l; i++)
-			pixels[i] = c;
+		for (int l=length-1; l>=0; l--) values[l] = value;
 	}
-	
-	/*
-	 * returns all pixels in the texture
+
+	/**
+	 * Returns the array content of the buffer.
+	 * @return the array content of the buffer
+	 * @since 1.0.0
 	 */
 	public short[] content() 
 	{
-		return pixels;
+		return values;
+	}
+
+	/**
+	 * Take a value from the buffer at the specified index. This 
+	 * method has no boundary detection. It is up to the user to 
+	 * make sure the index is within bounds.
+	 * @param index - an index in the buffer array
+	 * @return the value from the buffer at the specified index
+	 * @since 1.0.0
+	 */
+	public short grab(int index)
+	{
+		return values[index];
 	}
 	
 	/**
-	 * get the color from the buffer with an index
-	 */
-	public short grab(int i)
-	{
-		return pixels[i];
-	}
-
-	/*
-	 * get the color from a texture
+	 * Take a value from the buffer at the specified coordinates.
+	 * This method has no boundary detection. It is up to the user 
+	 * to make sure the index is within bounds.
+	 * @param x - the location along the width of the buffer
+	 * @param y - the location along the height of the buffer
+	 * @return the value from the buffer at the specified coordinates
+	 * @since 1.0.0
 	 */
 	public short grab(int x, int y)
 	{
-		return pixels[x + y*width];
+		return values[x + y*width];
 	}
 	
-	/*
-	 * get the color from a texture using u,v and w values<br>
+	/**
+	 * Take a value from the buffer at the specified UV mapping 
+	 * coordinates. The parameter W is a depth scaling value 
+	 * that can be kept at 1 if no depth correction is performed.
+	 * This method has no boundary detection. It is up to the user 
+	 * to make sure the index is within bounds.
+	 * @param u - a factor [0-1] along the width of the buffer
+	 * @param v - a factor [0-1] along the height of the buffer
+	 * @param w - the depth scaling parameter
+	 * @return the value from the buffer at the found coordinates
+	 * @since 1.0.0
 	 */
 	public short grab(float u, float v, float w)
 	{
 		float sc = 0.999f*w;
 		int x = (int)(sc*u*width);
 		int y = (int)(sc*v*height);
-		return pixels[x + y*width];
+		return values[x + y*width];
 	}
 	
-	/**
-	 * get a clean copy of this buffer
-	 */
+	@Override
+	public void free()
+	{
+		values = null;
+	}
+
+	@Override
 	public ShortBuffer copy()
 	{
 		ShortBuffer buff = new ShortBuffer(width,height);

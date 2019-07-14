@@ -7,40 +7,47 @@ package com.nullpointerworks.core.buffer.concurrency;
 
 import com.nullpointerworks.core.buffer.BooleanBuffer;
 
+/**
+ * A thread safe implementation of the {@code BooleanBuffer}.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
+ */
 public class SyncBooleanBuffer extends BooleanBuffer
 {
 	private SyncBooleanBuffer lock = this;
-	
-	public SyncBooleanBuffer(int w, int h) 
+
+	/**
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to false.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
+	 */
+	public SyncBooleanBuffer(int width, int height) 
 	{
-		super(w, h);
+		super(width, height);
 	}
-	
-	public SyncBooleanBuffer(int w, int h, boolean i) 
+
+	/**
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
+	 */
+	public SyncBooleanBuffer(int width, int height, boolean init) 
 	{
-		super(w, h, i);
-	}
-	
-	public void resize(int w, int h)
-	{
-		resize(w,h,false);
-	}
-	
-	public void resize(int w, int h, boolean value)
-	{
-		synchronized (lock)
-		{
-			super.resize(w, h, value);
-		}
+		super(width, height, init);
 	}
 
 	// ==========================================
 	
-	public void clear(boolean c) 
+	public void clear(boolean value) 
 	{
 		synchronized (lock)
 		{
-			super.clear(c);
+			super.clear(value);
 		}
 	}
 	
@@ -72,11 +79,11 @@ public class SyncBooleanBuffer extends BooleanBuffer
 	
 	// ==========================================
 	
-	public boolean grab(int i)
+	public boolean grab(int index)
 	{
 		synchronized (lock)
 		{
-			return super.grab(i);
+			return super.grab(index);
 		}
 	}
 	
@@ -98,27 +105,27 @@ public class SyncBooleanBuffer extends BooleanBuffer
 	
 	// ==========================================
 	
-	public void plot(boolean[] c)
+	public void plot(boolean[] values)
 	{
 		synchronized (lock)
 		{
-			super.plot(c);
+			super.plot(values);
 		}
 	}
 	
-	public void plot(int i, boolean c)
+	public void plot(int index, boolean value)
 	{
 		synchronized (lock)
 		{
-			super.plot(i, c);
+			super.plot(index, value);
 		}
 	}
 	
-	public void plot(int x, int y, boolean c)
+	public void plot(int x, int y, boolean value)
 	{
 		synchronized (lock)
 		{
-			super.plot(x, y, c);
+			super.plot(x, y, value);
 		}
 	}
 }

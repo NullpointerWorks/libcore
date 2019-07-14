@@ -7,40 +7,47 @@ package com.nullpointerworks.core.buffer.concurrency;
 
 import com.nullpointerworks.core.buffer.ShortBuffer;
 
+/**
+ * A thread safe implementation of the {@code ShortBuffer}.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
+ */
 public class SyncShortBuffer extends ShortBuffer
 {
 	private SyncShortBuffer lock = this;
-	
-	public SyncShortBuffer(int w, int h) 
+
+	/**
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to false.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
+	 */
+	public SyncShortBuffer(int width, int height) 
 	{
-		super(w, h);
+		super(width, height);
 	}
-	
-	public SyncShortBuffer(int w, int h, short i) 
+
+	/**
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
+	 */
+	public SyncShortBuffer(int width, int height, short init) 
 	{
-		super(w, h, i);
-	}
-	
-	public void resize(int w, int h)
-	{
-		resize(w,h,(short)0);
-	}
-	
-	public void resize(int w, int h, short value)
-	{
-		synchronized (lock)
-		{
-			super.resize(w, h, value);
-		}
+		super(width, height, init);
 	}
 
 	// ==========================================
 	
-	public void clear(short c) 
+	public void clear(byte value) 
 	{
 		synchronized (lock)
 		{
-			super.clear(c);
+			super.clear(value);
 		}
 	}
 	
@@ -72,11 +79,11 @@ public class SyncShortBuffer extends ShortBuffer
 	
 	// ==========================================
 	
-	public short grab(int i)
+	public short grab(int index)
 	{
 		synchronized (lock)
 		{
-			return super.grab(i);
+			return super.grab(index);
 		}
 	}
 	
@@ -98,27 +105,27 @@ public class SyncShortBuffer extends ShortBuffer
 	
 	// ==========================================
 	
-	public void plot(short[] c)
+	public void plot(short[] values)
 	{
 		synchronized (lock)
 		{
-			super.plot(c);
+			super.plot(values);
 		}
 	}
 	
-	public void plot(int i, short c)
+	public void plot(int index, short value)
 	{
 		synchronized (lock)
 		{
-			super.plot(i, c);
+			super.plot(index, value);
 		}
 	}
 	
-	public void plot(int x, int y, short c)
+	public void plot(int x, int y, short value)
 	{
 		synchronized (lock)
 		{
-			super.plot(x, y, c);
+			super.plot(x, y, value);
 		}
 	}
 }

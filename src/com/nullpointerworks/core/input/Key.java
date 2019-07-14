@@ -6,21 +6,23 @@
 package com.nullpointerworks.core.input;
 
 /**
- * Contains static some inetger ASCII members which are of common usage in 
+ * Contains static some integer ASCII members which are of common usage in 
  * games. This is not a comprehensive collection of all ASCII/UTF character 
  * codes, just the ones that are common such as letters (A-Z) and numbers 
  * (0-9), some control keys (CTRL, ALT, ESC, etc.), arrow keys and F1-10 keys.
  * 
- * @author Michiel Drost - nullpointerworks
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
  */
 public class Key 
 {
 	/**
-	 * Returns true if the given keycode is a letter in the alphabet. The 
-	 * ASCII codes for letters is from 65 until and including 90 for uppercase 
-	 * letters, and from 97 until and including 122 for lowercase letters.
-	 * @param code - the integer keycode
+	 * Returns true if the given key code is a letter in the alphabet. The 
+	 * ASCII codes for letters is from 65 until and including 90 for upper case 
+	 * letters, and from 97 until and including 122 for lower case letters.
+	 * @param code - the integer key code
 	 * @return true if the given code is a letter
+	 * @since 1.0.0
 	 */
 	public static boolean isLetter(int code)
 	{
@@ -32,6 +34,7 @@ public class Key
 	 * for numbers is from 48 until and including 57.
 	 * @param code - the integer keycode
 	 * @return true if the given code is a number
+	 * @since 1.0.0
 	 */
 	public static boolean isNumber(int code)
 	{
@@ -53,8 +56,9 @@ public class Key
 	 * , (= 44) 
 	 * * (= 42) 
 	 * ' (= 39)</pre>
-	 * @param code - the integer keycode
+	 * @param code - the integer key code
 	 * @return true for non-shifted punctuation markers
+	 * @since 1.0.0
 	 */
 	public static boolean isPunctuation(int code)
 	{
@@ -77,15 +81,22 @@ public class Key
 		return false;
 	}
 	
+	/**
+	 * Returns the string representation of the given key code.
+	 * @return the string representation of the given key code
+	 * @param code - the integer key code
+	 * @since 1.0.0
+	 */
 	public static String toString(int code)
 	{
 		return ""+((char)code);
 	}
 	
 	/**
-	 * Returns the shifted keycode for the given character code if it can be shifted.
-	 * @param code - the integer keycode
-	 * @return the keycode of the character when shifted
+	 * Returns the shifted key code for the given character code if it can be shifted.
+	 * @param code - the integer key code
+	 * @return the key code of the character when shifted
+	 * @since 1.0.0
 	 */
 	public static int shift(int code)
 	{

@@ -10,9 +10,10 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 /**
- * Monitor device class provides access the JVM's graphics 
- * environment, which in turn provides access to all connected monitors.
- * @author Michiel Drost - nullpointerworks
+ * The Monitor class provides access the JVM's graphics environment, which in turn 
+ * provides access to all connected monitors.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
  */
 public class Monitor 
 {
@@ -20,8 +21,9 @@ public class Monitor
 	
 	/**
 	 * Returns a Monitor object with the details of the selected display device.
-	 * @param id 
+	 * @param id is the monitor identity on the host OS. Provide the identity - 1.
 	 * @return a Monitor object with the details of the selected display device
+	 * @since 1.0.0
 	 */
 	public static Monitor getDisplay(int id)
 	{
@@ -33,6 +35,7 @@ public class Monitor
 	/**
 	 * Returns an array of Monitor objects for each connected monitor.
 	 * @return an array of Monitor objects for each connected monitor
+	 * @since 1.0.0
 	 */
 	public static Monitor[] getDisplay()
 	{
@@ -49,13 +52,14 @@ public class Monitor
 			d.ge = ge;
 			d.gd = gd[i];
 			d.dm = d.gd.getDisplayMode();
-			d.width = d.dm.getWidth();
-			d.height = d.dm.getHeight();
 			de[i] = d;
 		}
 		return de;
 	}
 	
+	/*
+	 * private clamping function. Rather this, than having a libnpw.math dependency.
+	 */
 	private static int clamp(int lower, int x, int upper)
 	{
 		int x1 = (x<lower)?lower:x;
@@ -64,8 +68,50 @@ public class Monitor
 	
 	// ======================================
 	
-	public GraphicsEnvironment ge;
+	private GraphicsEnvironment ge;
 	public GraphicsDevice gd;
 	public DisplayMode dm;
-	public int width, height, deviceID;
+	public int deviceID;
+	
+	/**
+	 * Returns the host's graphics environment associated with the monitor.
+	 * @return the host's graphics environment associated with the monitor
+	 * @since 1.0.0
+	 */
+	public GraphicsEnvironment getGraphicsEnvironment() {return ge;}
+	
+	/**
+	 * Returns the host's graphics device associated with the monitor.
+	 * @return the host's graphics device associated with the monitor
+	 * @since 1.0.0
+	 */
+	public GraphicsDevice getGraphicsDevice() {return gd;}
+	
+	/**
+	 * Returns the display mode for this monitor. This contains bit depth, width, height, etc.
+	 * @return the display mode for this monitor
+	 * @since 1.0.0
+	 */
+	public DisplayMode getDisplayMode() {return dm;}
+	
+	/**
+	 * Returns the width of the display, in pixels.
+	 * @return the width of the display, in pixels
+	 * @since 1.0.0
+	 */
+	public int getWidth() {return dm.getWidth();}
+	
+	/**
+	 * Returns the height of the display, in pixels.
+	 * @return the height of the display, in pixels
+	 * @since 1.0.0
+	 */
+	public int getHeight() {return dm.getHeight();}
+
+	/**
+	 * Returns the device ID on the host OS.
+	 * @return the device ID on the host OS
+	 * @since 1.0.0
+	 */
+	public int getDeviceID() {return deviceID;}
 }

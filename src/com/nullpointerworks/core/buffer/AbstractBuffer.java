@@ -6,7 +6,9 @@
 package com.nullpointerworks.core.buffer;
 
 /**
- * Buffer object abstract for all libnpw-core buffers.
+ * Buffer object abstraction for all libnpw-core buffers.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
  */
 abstract class AbstractBuffer<B>
 {
@@ -14,29 +16,56 @@ abstract class AbstractBuffer<B>
 	protected int height = 0;
 	protected int length = 0;
 	
-	public AbstractBuffer(int w, int h)
+	/**
+	 * Sets the dimensions and area of the buffer. 
+	 * @param 
+	 * @since 1.0.0
+	 */
+	protected void setBuffer(int width, int height)
 	{
-		setBuffer(w,h);
+		this.width=width;
+		this.height=height;
+		length=width*height;
 	}
 	
-	protected void setBuffer(int w, int h)
-	{
-		width 		= w;
-		height 		= h;
-		length		= w*h;
-	}
-	
+	/**
+	 * Returns the width of the buffer.
+	 * @return the width of the buffer
+	 * @since 1.0.0
+	 */
     public int getWidth()
     {return width;}
     
+	/**
+	 * Returns the height of the buffer.
+	 * @return the height of the buffer
+	 * @since 1.0.0
+	 */
     public int getHeight()
     {return height;}
     
+	/**
+	 * Returns the length of the buffer.
+	 * @return the length of the buffer
+	 * @since 1.0.0
+	 */
     public int getLength()
     {return length;}
     
+	/**
+	 * All buffers have the ability to provide a reference 
+	 * free copy. This returned object contain the same 
+	 * values as the original.
+	 * @return a reference free copy of this buffer
+	 * @since 1.0.0
+	 */
     public abstract B copy();
-
-    public abstract void free();
     
+	/**
+	 * Clears the content of this buffer, and sets all internals 
+	 * to {@code null}. Garbage collection will do the rest. This 
+	 * object this can be used after this method has been invoked.
+	 * @since 1.0.0
+	 */
+    public abstract void free();
 }

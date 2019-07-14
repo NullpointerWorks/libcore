@@ -7,40 +7,47 @@ package com.nullpointerworks.core.buffer.concurrency;
 
 import com.nullpointerworks.core.buffer.FloatBuffer;
 
+/**
+ * A thread safe implementation of the {@code FloatBuffer}.
+ * @author Michiel Drost - Nullpointer Works
+ * @since 1.0.0
+ */
 public class SyncFloatBuffer extends FloatBuffer
 {
 	private SyncFloatBuffer lock = this;
-	
-	public SyncFloatBuffer(int w, int h) 
+
+	/**
+	 * Creates a buffer with the given dimensions. Each 
+	 * element of this buffer will be defaulted to false.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @since 1.0.0
+	 */
+	public SyncFloatBuffer(int width, int height) 
 	{
-		super(w, h);
+		super(width, height);
 	}
-	
-	public SyncFloatBuffer(int w, int h, float i) 
+
+	/**
+	 * Creates a buffer with the given dimensions and 
+	 * initial value.
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
+	 * @param init - the initial value
+	 * @since 1.0.0
+	 */
+	public SyncFloatBuffer(int width, int height, float init) 
 	{
-		super(w, h, i);
-	}
-	
-	public void resize(int w, int h)
-	{
-		resize(w,h,0f);
-	}
-	
-	public void resize(int w, int h, float value)
-	{
-		synchronized (lock)
-		{
-			super.resize(w, h, value);
-		}
+		super(width, height, init);
 	}
 
 	// ==========================================
 	
-	public void clear(float c) 
+	public void clear(float value) 
 	{
 		synchronized (lock)
 		{
-			super.clear(c);
+			super.clear(value);
 		}
 	}
 	
@@ -72,11 +79,11 @@ public class SyncFloatBuffer extends FloatBuffer
 	
 	// ==========================================
 	
-	public float grab(int i)
+	public float grab(int index)
 	{
 		synchronized (lock)
 		{
-			return super.grab(i);
+			return super.grab(index);
 		}
 	}
 	
@@ -98,27 +105,27 @@ public class SyncFloatBuffer extends FloatBuffer
 	
 	// ==========================================
 	
-	public void plot(float[] c)
+	public void plot(float[] values)
 	{
 		synchronized (lock)
 		{
-			super.plot(c);
+			super.plot(values);
 		}
 	}
 	
-	public void plot(int i, float c)
+	public void plot(int index, float value)
 	{
 		synchronized (lock)
 		{
-			super.plot(i, c);
+			super.plot(index, value);
 		}
 	}
 	
-	public void plot(int x, int y, float c)
+	public void plot(int x, int y, float value)
 	{
 		synchronized (lock)
 		{
-			super.plot(x, y, c);
+			super.plot(x, y, value);
 		}
 	}
 }
