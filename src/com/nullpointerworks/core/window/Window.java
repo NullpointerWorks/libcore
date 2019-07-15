@@ -6,6 +6,7 @@
 package com.nullpointerworks.core.window;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
@@ -406,13 +407,15 @@ public class Window
 		if (m == WINDOWED)
 		{
 			jf_frame.setUndecorated(false);
-			jf_frame.setLocationRelativeTo(null);
+			Point p = monitor.getGraphicsEnvironment().getCenterPoint();
+			jf_frame.setLocation(p.x - (width>>1), p.y - (height>>1) );
 		}
 		
 		if (m == BORDERLESS)
 		{
 			jf_frame.setUndecorated(true);
-			jf_frame.setLocationRelativeTo(null);
+			Point p = monitor.getGraphicsEnvironment().getCenterPoint();
+			jf_frame.setLocation(p.x - (width>>1), p.y - (height>>1) );
 		}
 		
 		if (m == BORDERLESSFULL)
@@ -420,6 +423,7 @@ public class Window
 			jf_frame.setUndecorated(true);
 			Rectangle r = monitor.getGraphicsDevice().getDefaultConfiguration().getBounds();
 			jf_frame.setLocation(r.x,r.y);
+			jf_frame.setLocationRelativeTo(null);
 			width = monitor.getWidth();
 			height = monitor.getHeight();
 		}
@@ -429,14 +433,12 @@ public class Window
 			if (monitor.getGraphicsDevice().isFullScreenSupported())
 			{
 				jf_frame.setUndecorated(true);
-				monitor.getGraphicsDevice().setFullScreenWindow(jf_frame);
-				canvas = new PanelCanvas(monitor.getWidth(), monitor.getHeight());
-
 				Rectangle r = monitor.getGraphicsDevice().getDefaultConfiguration().getBounds();
-				int wx = r.x + (r.width - this.width >> 1);
-				int wy = r.y + (r.height - this.height >> 1);
-				
-				jf_frame.setLocation(wx,wy);
+				jf_frame.setLocation(r.x,r.y);
+				jf_frame.setLocationRelativeTo(null);
+				monitor.getGraphicsDevice().setFullScreenWindow(jf_frame);
+				width = monitor.getWidth();
+				height = monitor.getHeight();
 			}
 			else
 			{
