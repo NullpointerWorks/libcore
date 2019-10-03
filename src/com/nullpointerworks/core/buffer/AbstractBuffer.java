@@ -18,7 +18,8 @@ abstract class AbstractBuffer<B>
 	
 	/**
 	 * Sets the dimensions and area of the buffer. 
-	 * @param 
+	 * @param width - the width of the buffer
+	 * @param height - the height of the buffer
 	 * @since 1.0.0
 	 */
 	protected void setBuffer(int width, int height)

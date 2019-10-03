@@ -34,9 +34,9 @@ public class BooleanBuffer extends AbstractBuffer<BooleanBuffer>
 	 * @param init - the initial value
 	 * @since 1.0.0
 	 */
-	public BooleanBuffer(int w, int h, boolean init) 
+	public BooleanBuffer(int width, int height, boolean init) 
 	{
-		createBuffer(w, h);
+		createBuffer(width, height);
 		clear(init);
 	}
 	
