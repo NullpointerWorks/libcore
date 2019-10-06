@@ -2,7 +2,6 @@
 Provides a toolkit for windows, mouse and keyboard input and basic pixel plotting.
 
 # module
-* requires java.base
 * requires transitive java.desktop
 * exports com.nullpointerworks.core
 * exports com.nullpointerworks.core.buffer
