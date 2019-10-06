@@ -3,7 +3,9 @@
  * Nullpointer Works (2019)
  * Use is subject to license terms.
  */
-package com.nullpointerworks.core.window;
+package com.nullpointerworks.core;
+
+import static com.nullpointerworks.core.WindowMode.*;
 
 import java.awt.Component;
 import java.awt.Point;
@@ -20,8 +22,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import static com.nullpointerworks.core.window.WindowMode.*;
-import com.nullpointerworks.core.Monitor;
 import com.nullpointerworks.core.buffer.IntBuffer;
 import com.nullpointerworks.core.input.KeyboardInput;
 import com.nullpointerworks.core.input.MouseInput;

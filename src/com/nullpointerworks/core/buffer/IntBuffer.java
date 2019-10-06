@@ -6,7 +6,7 @@
 package com.nullpointerworks.core.buffer;
 
 /**
- * A buffer implementation that contains a {@code short} array.
+ * A buffer implementation that contains a {@code int} array.
  * @author Michiel Drost - Nullpointer Works
  * @since 1.0.0
  */

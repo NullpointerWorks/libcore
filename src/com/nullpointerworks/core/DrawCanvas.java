@@ -3,7 +3,7 @@
  * Nullpointer Works (2019)
  * Use is subject to license terms.
  */
-package com.nullpointerworks.core.window;
+package com.nullpointerworks.core;
 
 import java.awt.Component;
 
