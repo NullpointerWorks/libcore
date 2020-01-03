@@ -8,41 +8,38 @@ package com.nullpointerworks.core;
 import java.awt.Component;
 
 /**
- * Drawing interface for a libnpw.core window. 
+ * A rendering interface that provides a handle for a Window to display.
  * @author Michiel Drost - Nullpointer Works
  * @since 1.0.0
  */
 public interface DrawCanvas
 {
 	/**
-	 * Returns the width of the drawing canvas.
-	 * @return the width of the drawing canvas
+	 * Returns the width in pixels of the drawing canvas.
+	 * @return the width in pixels
 	 * @since 1.0.0
 	 */
 	int width();
 	
 	/**
-	 * Returns the height of the drawing canvas.
-	 * @return the height of the drawing canvas
+	 * Returns the height in pixels of the drawing canvas.
+	 * @return the height in pixels
 	 * @since 1.0.0
 	 */
 	int height();
 	
 	/**
-	 * Returns the component that will be added 
-	 * to the {@code JFrame} in the window.
-	 * @return the component for the window to display
-	 * @since 1.0.0
-	 */
-	Component component();
-	
-	/**
-	 * The given array of integers represent the 
-	 * colors to be rendered. Each integer is 
-	 * an ARGB at 8 bit depth.
+	 * Swap the content of the provided array with the content held by the drawing canvas. The swapped content will be displayed when new frames are requested. Each integer is an ARGB color at 8 bit depth.
 	 * @param pixels - an integer array for the same size as the rendering surface
 	 * @since 1.0.0
 	 */
 	void swap(int[] pixels);
+	
+	/**
+	 * Returns a java.awt.Component to which the canvas is drawing on. It can be added as a UI element to the {@code JFrame} in the window.
+	 * @return the component for the window to display
+	 * @since 1.0.0
+	 */
+	Component component();
 }
  

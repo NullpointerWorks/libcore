@@ -10,8 +10,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 /**
- * The Monitor class provides access the JVM's graphics environment, which in turn 
- * provides access to all connected monitors.
+ * Provides access the host PC's graphics environment to gain access to its connected monitors..
  * @author Michiel Drost - Nullpointer Works
  * @since 1.0.0
  */
@@ -69,9 +68,14 @@ public class Monitor
 	// ======================================
 	
 	private GraphicsEnvironment ge;
-	public GraphicsDevice gd;
-	public DisplayMode dm;
-	public int deviceID;
+	private GraphicsDevice gd;
+	private DisplayMode dm;
+	private int deviceID;
+	
+	/*
+	 * instantiate new monitor object
+	 */
+	private Monitor() {}
 	
 	/**
 	 * Returns the host's graphics environment associated with the monitor.
@@ -95,15 +99,15 @@ public class Monitor
 	public DisplayMode getDisplayMode() {return dm;}
 	
 	/**
-	 * Returns the width of the display, in pixels.
-	 * @return the width of the display, in pixels
+	 * Returns the width in pixels of the display.
+	 * @return the width in pixels
 	 * @since 1.0.0
 	 */
 	public int getWidth() {return dm.getWidth();}
 	
 	/**
-	 * Returns the height of the display, in pixels.
-	 * @return the height of the display, in pixels
+	 * Returns the height in pixels of the display.
+	 * @return the height in pixels
 	 * @since 1.0.0
 	 */
 	public int getHeight() {return dm.getHeight();}
