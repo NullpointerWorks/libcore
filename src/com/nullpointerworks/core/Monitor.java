@@ -10,7 +10,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 /**
- * Provides access the host PC's graphics environment to gain access to its connected monitors..
+ * Provides access the host PC's graphics environment to gain access to its connected monitors.
  * @author Michiel Drost - Nullpointer Works
  * @since 1.0.0
  */

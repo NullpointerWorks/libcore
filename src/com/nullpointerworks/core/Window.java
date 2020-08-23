@@ -351,7 +351,7 @@ public class Window
 	 * @return the title of the window
 	 * @since 1.0.0
 	 */
-	public String geTitle() {return title;}
+	public String getTitle() {return title;}
 	
 	// =============================================================
 	
