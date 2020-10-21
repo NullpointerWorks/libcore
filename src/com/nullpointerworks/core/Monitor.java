@@ -75,47 +75,54 @@ public class Monitor
 	/*
 	 * instantiate new monitor object
 	 */
-	private Monitor() {}
+	private Monitor() 
+	{}
 	
 	/**
 	 * Returns the host's graphics environment associated with the monitor.
 	 * @return the host's graphics environment associated with the monitor
 	 * @since 1.0.0
 	 */
-	public GraphicsEnvironment getGraphicsEnvironment() {return ge;}
+	public GraphicsEnvironment getGraphicsEnvironment() 
+	{return ge;}
 	
 	/**
 	 * Returns the host's graphics device associated with the monitor.
 	 * @return the host's graphics device associated with the monitor
 	 * @since 1.0.0
 	 */
-	public GraphicsDevice getGraphicsDevice() {return gd;}
+	public GraphicsDevice getGraphicsDevice() 
+	{return gd;}
 	
 	/**
 	 * Returns the display mode for this monitor. This contains bit depth, width, height, etc.
 	 * @return the display mode for this monitor
 	 * @since 1.0.0
 	 */
-	public DisplayMode getDisplayMode() {return dm;}
+	public DisplayMode getDisplayMode() 
+	{return dm;}
 	
 	/**
 	 * Returns the width in pixels of the display.
 	 * @return the width in pixels
 	 * @since 1.0.0
 	 */
-	public int getWidth() {return dm.getWidth();}
+	public int getWidth() 
+	{return dm.getWidth();}
 	
 	/**
 	 * Returns the height in pixels of the display.
 	 * @return the height in pixels
 	 * @since 1.0.0
 	 */
-	public int getHeight() {return dm.getHeight();}
+	public int getHeight() 
+	{return dm.getHeight();}
 
 	/**
 	 * Returns the device ID on the host OS.
 	 * @return the device ID on the host OS
 	 * @since 1.0.0
 	 */
-	public int getDeviceID() {return deviceID;}
+	public int getDeviceID() 
+	{return deviceID;}
 }
