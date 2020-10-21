@@ -84,7 +84,9 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public GraphicsEnvironment getGraphicsEnvironment() 
-	{return ge;}
+	{
+		return ge;
+	}
 	
 	/**
 	 * Returns the host's graphics device associated with the monitor.
@@ -92,7 +94,9 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public GraphicsDevice getGraphicsDevice() 
-	{return gd;}
+	{
+		return gd;
+	}
 	
 	/**
 	 * Returns the display mode for this monitor. This contains bit depth, width, height, etc.
@@ -100,7 +104,9 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public DisplayMode getDisplayMode() 
-	{return dm;}
+	{
+		return dm;
+	}
 	
 	/**
 	 * Returns the width in pixels of the display.
@@ -108,7 +114,9 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public int getWidth() 
-	{return dm.getWidth();}
+	{
+		return dm.getWidth();
+	}
 	
 	/**
 	 * Returns the height in pixels of the display.
@@ -116,7 +124,9 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public int getHeight() 
-	{return dm.getHeight();}
+	{
+		return dm.getHeight();
+	}
 
 	/**
 	 * Returns the device ID on the host OS.
@@ -124,5 +134,7 @@ public class Monitor
 	 * @since 1.0.0
 	 */
 	public int getDeviceID() 
-	{return deviceID;}
+	{
+		return deviceID;
+	}
 }
