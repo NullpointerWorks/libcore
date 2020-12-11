@@ -28,10 +28,9 @@ public class PanelCanvas extends JPanel implements DrawCanvas
 	private int[] pixels;
 	
 	/**
-	 * Creates a drawing surface of the given dimensions. It will 
-	 * accepts colors as integers in ARGB format at 8 bit depth.
-	 * @param width - the width of the drawing surface
-	 * @param height - the height of the drawing surface
+	 * Creates a drawing surface of the given dimensions. It will accepts colors as integers in ARGB format at 8 bit depth.
+	 * @param width the width of the drawing surface
+	 * @param height the height of the drawing surface
 	 * @since 1.0.0
 	 */
 	public PanelCanvas(int width, int height) 
@@ -46,25 +45,37 @@ public class PanelCanvas extends JPanel implements DrawCanvas
 		bi = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 		pixels = getContent(bi);
 	}
-
+	
+	/**
+	 * @override com.nullpointerworks.core.DrawCanvas
+	 */
 	@Override
 	public int width()
 	{
 		return width;
 	}
-
+	
+	/**
+	 * @override com.nullpointerworks.core.DrawCanvas
+	 */
 	@Override
 	public int height()
 	{
 		return height;
 	}
 	
+	/**
+	 * @override com.nullpointerworks.core.DrawCanvas
+	 */
 	@Override
 	public Component component()
 	{
 		return this;
 	}
 	
+	/**
+	 * @override com.nullpointerworks.core.DrawCanvas
+	 */
 	@Override
 	public void swap(int[] pix)
 	{
@@ -77,6 +88,9 @@ public class PanelCanvas extends JPanel implements DrawCanvas
 		paint(this.getGraphics());
 	}
 	
+	/**
+	 * @override javax.swing.JComponent
+	 */
 	@Override
 	public void paint(Graphics g) 
 	{         

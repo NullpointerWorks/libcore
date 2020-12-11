@@ -30,7 +30,7 @@ public interface DrawCanvas
 	
 	/**
 	 * Swap the content of the provided array with the content held by the drawing canvas. The swapped content will be displayed when new frames are requested. Each integer is an ARGB color at 8 bit depth.
-	 * @param pixels - an integer array for the same size as the rendering surface
+	 * @param pixels an integer array for the same size as the rendering surface
 	 * @since 1.0.0
 	 */
 	void swap(int[] pixels);
