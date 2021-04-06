@@ -1,3 +1,5 @@
+![CC BY-SA 4.0](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png "CC BY-SA 4.0")
+
 # libcore
 Provides a toolkit for windows, mouse and keyboard input and basic pixel plotting.
 
